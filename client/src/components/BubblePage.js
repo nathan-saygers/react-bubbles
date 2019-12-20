@@ -13,9 +13,9 @@ const BubblePage = () => {
     setColorList(filteredArr);
   }
 
-  const removeEditedColor = edID => {
-    const filteredArr = colorList.filter(item => item.id !== edID)
-    setColorList(filteredArr);
+  const removeEditedColor = colorToEdit => {
+    const filteredArr = colorList.filter(item => item.id !== colorToEdit.id)
+    setColorList([...filteredArr, colorToEdit]);
     console.log('Color list after being set to filtered array', colorList)
   }
 

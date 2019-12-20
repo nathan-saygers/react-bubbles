@@ -23,9 +23,7 @@ const ColorList = (props) => {
       Authorization: localStorage.getItem('token')
     }})
       .then(res => {
-        props.removeEditedColor(colorToEdit.id)
-        console.log('color to edit id', colorToEdit.id)
-        props.updateColors([...props.colors, res.data])
+        props.removeEditedColor(res.data);
       })
       .catch(err => {
         console.log(err)
