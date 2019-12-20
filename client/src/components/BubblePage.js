@@ -8,9 +8,15 @@ const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
-  const removeDeletedColors = res => {
-    const filteredArr = colorList.filter(item => item.id !== res.data)
+  const removeDeletedColors = delID => {
+    const filteredArr = colorList.filter(item => item.id !== delID.data)
     setColorList(filteredArr);
+  }
+
+  const removeEditedColor = edID => {
+    const filteredArr = colorList.filter(item => item.id !== edID)
+    setColorList(filteredArr);
+    console.log('Color list after being set to filtered array', colorList)
   }
 
   useEffect(() => {
@@ -29,7 +35,7 @@ const BubblePage = () => {
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} removeDeletedColors={removeDeletedColors} />
+      <ColorList colors={colorList} updateColors={setColorList} removeDeletedColors={removeDeletedColors} removeEditedColor={removeEditedColor}/>
       <Bubbles colors={colorList} />
     </>
   );

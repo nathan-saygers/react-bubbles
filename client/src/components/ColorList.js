@@ -7,7 +7,7 @@ const initialColor = {
 };
 
 const ColorList = (props) => {
-  console.log(props.colors);
+  console.log('mystery log', props.colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -18,11 +18,14 @@ const ColorList = (props) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    axios(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit, {headers: {
+    axios
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit, {headers: {
       Authorization: localStorage.getItem('token')
     }})
-      .put(res => {
-        console.log(res)
+      .then(res => {
+        props.removeEditedColor(colorToEdit.id)
+        console.log('color to edit id', colorToEdit.id)
+        props.updateColors([...props.colors, res.data])
       })
       .catch(err => {
         console.log(err)
